@@ -444,3 +444,4 @@ with temptable(user_id, travelled_distance) as (select user_id, sum(distance) as
 select name, case when travelled_distance is NULL then 0
 else travelled_distance
 end as travelled_distance from Users u LEFT JOIN temptable t on u.id = t.user_id ORDER BY travelled_distance desc, name;
+
