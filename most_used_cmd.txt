@@ -1,0 +1,34 @@
+
+# To install Mongodb using brew
+brew install mongodb-community@6.0
+
+# Run Mongodb
+brew services start mongodb-community@6.0
+
+# Stop mongodb
+brew services stop mongodb-community@6.0
+
+# run mongodb manually as a background process
+mondodb --config /opt/homebrew/etc/mongod.conf --fork
+
+# to verify that mondodb is running
+brew services list
+ps aux | grep -v grep | grep mongod
+
+# to connect and use mongodb
+mongosh
+
+==> Caveats
+==> mongodb-community
+To start mongodb/brew/mongodb-community now and restart at login:
+  brew services start mongodb/brew/mongodb-community
+Or, if you don't want/need a background service you can just run:
+  mongod --config /opt/homebrew/etc/mongod.conf
+==> msodbcsql
+If you installed this formula with the registration option (default), 
+you'll
+need to manually remove [ODBC Driver 13 for SQL Server] section from
+odbcinst.ini after the formula is uninstalled. This can be done by 
+executing
+the following command:
+odbcinst -u -d -n "ODBC Driver 13 for SQL Server"
