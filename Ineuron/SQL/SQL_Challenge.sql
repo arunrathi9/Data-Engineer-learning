@@ -8,6 +8,112 @@ CREATE DATABASE Challenge_set1
 
 USE Challenge_set1;
 
+-- Q1
+CREATE TABLE if NOT exists city(
+    id INT,
+    name VARCHAR(17),
+    countrycode VARCHAR(3),
+    district VARCHAR(20),
+    population INT
+);
+
+INSERT INTO city VALUES (1661, 'Rotterdam', 'NLD', 'Zuid-Holland', 593321),
+(3878, 'Scottsdale', 'USA', 'Arizona', 202705),
+(3965, 'Corona', 'USA', 'California', 124966),
+(3973, 'Concord', 'USA', 'California', 121780),
+(3977, 'Cedar Rapids', 'USA', 'lowa', 120758),
+(3982, 'Coral Springs', 'USA', 'Florida', 117549),
+(4054, 'Fairfield', 'USA', 'California', 92256),
+(4058, 'Boulder', 'USA', 'Colorado', 91238),
+(4061, 'Fall River', 'USA', 'Massachusetts', 90555);
+
+# Q1. Query all columns for all American cities in the City Table with populations larger than 100000.
+SELECT * from city where population > 100000;
+
+# Q2. Query the Name field for all american cities in the City Table with populations larger than 120000.
+SELECT name from city where population > 120000;
+
+# Q3. Query all columns(ATTRIBUTEs) for every row in the city table
+SELECT * FROM city;
+
+# Q4. Query all columns for a city in City with the id 1661.
+SELECT * FROM city WHERE id = 1661;
+
+# Q5. Query all ATTRIBUTEs of every Japanese city in the City table. Japan code - JPN
+SELECT * FROM city where countrycode = 'JPN';
+
+# Q6. QUERY the names of all the japenses city in the city table. code - 'JPN'
+SELECT * FROM city where countrycode = 'JPN';
+
+# DATASET 2
+CREATE TABLE STATION (
+    ID INT,
+    CITY VARCHAR(21),
+    STATE VARCHAR(2),
+    LAT_N INT,
+    LONG_W INT
+);
+
+INSERT INTO STATION VALUES (794, 'Kissee Mills', 'MO', 139, 73),
+(824, 'Loma Mar', 'CA', 48, 130),
+(603, 'Sandy Hook', 'CT', 72, 148),
+(478, 'Tipton', 'IN', 33, 97),
+(619, 'Arlington', 'CO', 75, 92),
+(711, 'Turner', 'AR', 50, 101),
+(839, 'Slidell', 'LA', 85, 151),
+(411, 'Negreet', 'LA', 98, 105),
+(588, 'Glencoe', 'KY', 46, 136),
+(665, 'Chelsa', 'IA', 98, 59),
+(342, 'Chignik Lagoon', 'AK', 103, 153),
+(733, 'Pelahatchie', 'MS', 38, 28),
+(441, 'Hanna', 'IL', 50, 136),
+(811, 'Dorrance', 'KS', 102, 121),
+(698, 'Albany', 'CA', 49, 80),
+(325, 'Mounment', 'KS', 102, 121),
+(414, 'Manchester', 'MD', 73, 37),
+(113, 'Prescott', 'IA', 39, 65),
+(971, 'Graettinger', 'IA', 94, 150),
+(266, 'Cahone', 'CO', 116, 127);
+
+# Q7. Query a list of City and State from the station table.
+SELECT CITY, STATE FROM STATION;
+
+# Q8. QUERY A LIST OF CITY NAMES FROM STATION for cities that have an even ID number. only distinct
+SELECT DISTINCT(CITY) FROM STATION WHERE ID%2 = 0;
+
+# Q9. Find the difference between the total number of CITY entries in the table and the number of DISTINCT city entries
+SELECT COUNT(CITY) - count(DISTINCT(CITY)) AS DIFF FROM STATION;
+
+# Q10. QUERY THE two cities in STATION with the shortest and longest city names, as well as their respective lengths
+# (i.e. # of char in name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+select CITY, LENGTH(CITY) AS city_len FROM STATION  ORDER BY city_len, CITY LIMIT 1;
+select CITY, LENGTH(CITY) AS city_len FROM STATION  ORDER BY city_len DESC, CITY LIMIT 1;
+
+# Q11. QUERY THE list of city names starting with vowels (i.e. a,e,i,o,u) from Station.
+SELECT CITY FROM STATION WHERE CITY RLIKE '^[AEIOU]';
+
+# Q12. QUERY the list of CITY names ending with vowels from STATION.
+SELECT CITY FROM STATION WHERE CITY RLIKE '[aeiou]$';
+
+# Q13. Query the list of CITY names from STATION that do not start with vowels.
+SELECT CITY FROM STATION WHERE CITY not RLIKE '^[AEIOU]';
+
+# Q14. Query the list of CITY names from STATION that do not end with vowels.
+SELECT CITY FROM STATION WHERE CITY RLIKE '[^aeiou]$';
+
+# Q15. Query the list of CITY names from STATION that either do not start with vowels or
+# do not end with vowels.
+SELECT CITY FROM STATION WHERE CITY RLIKE '^[^aeiou]' OR CITY RLIKE '[^aeiou]$';
+
+# Q16. Query the list of CITY names from STATION that do not start with vowels and
+# do not end with vowels.
+SELECT CITY FROM STATION WHERE CITY RLIKE '^[^aeiou].*[^aeiou]$';
+
+
+
+
+
+
 -- Q17
 -- table - Product
 create table if not exists Product (
