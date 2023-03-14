@@ -5,6 +5,7 @@
 - EventBridge
 - S3
 
-![Project Architecture Design](image.jpg)
+
+<img src="image.jpg" alt= “Project Architecture Design” width="60%" height="60%" title="Project Architecture Design">
 
 Thanks for checking.
