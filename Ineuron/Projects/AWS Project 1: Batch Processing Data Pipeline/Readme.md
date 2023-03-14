@@ -5,6 +5,6 @@
 - EventBridge
 - S3
 
-![Project Architecture Design](~/AWS Project 1: Batch Processing Data Pipeline/image.jpg)
+![Project Architecture Design](image.jpg)
 
 Thanks for checking.
