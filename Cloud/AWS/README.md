@@ -143,3 +143,41 @@ To access private resources in a VPC, you can use a virtual private gateway. It 
 - Instance store: provides temporary block-level storage for an Amazon EC2 instance. It has the same lifespan as the instance. If EC2 instance is deleted/stopped, then instance store also get delete automatically.
 
 - Amazon Elastic Block Store (Amazon EBS): a service that provides block-level storage volumes that you can use with Amazon EC2 instances. If you stop or terminate an Amazon EC2 instance, all the data on the attached EBS volume remains available. EBS snapshot is an incremental backup
+
+- **Amazon Simple Storage Service (Amazon S3)**: a service that provides object-level storage. Amazon S3 stores data as objects in buckets. The maximum file size for an object in Amazon S3 is 5 TB. 
+    Amazon S3 different classes/tiers:
+      - Standard:
+          - Designed for frequently accessed data
+          - Stores data in a minimum of three Availability Zones
+      - Standard-Infrequent Access (S3 Standard-IA:
+          - infrequently accessed data
+          - lower storage price and higher retrieval price
+      - Glacier Instant Retrieval:
+          - well for archived data that requires immediate access.
+      - Outposts:
+          - delivers object storage to your on-premises AWS Outposts environment.
+    
+Clash of the Storage classes:<br>
+Usage depends on case:
+
+  - If there are not changes need to make into the file, then S3 is a good option.
+  - But if changes need to made in the file, then EBS is good as it stores the file as a blocks and can be easily edited.<br>
+<img width="752" alt="AWS_EBS" src="https://user-images.githubusercontent.com/27626791/230702595-c5c8079c-476c-4309-b5d1-a2c9bee88255.png">
+<img width="751" alt="AWS_S3" src="https://user-images.githubusercontent.com/27626791/230702599-f61a1b0a-196d-4cd6-ae22-0b8af7e7bdf4.png">
+
+**Amazon Elastic File System (Amazon EFS)**:
+
+  <p>In file storage, multiple clients (such as users, applications, servers, and so on) can access data that is stored in shared file folders. In this approach, a storage server uses block storage with a local file system to organize files. Clients access data through file paths.<br>Compared to block storage and object storage, file storage is ideal for use cases in which a large number of services and resources need to access the same data at the same time.</p>
+  
+  **Amazon Elastic File System (Amazon EFS)** is a scalable file system used with AWS Cloud services and on-premises resources. As you add and remove files, Amazon EFS grows and shrinks automatically. It can scale on demand to petabytes without disrupting applications.<br>
+  <img width="253" alt="Ebs" src="https://user-images.githubusercontent.com/27626791/230702955-8ffb1d3b-8340-407b-b617-fb23ee67ba2a.png">
+<img width="254" alt="efs" src="https://user-images.githubusercontent.com/27626791/230702959-67feb38c-6c9a-4364-b497-7947efc0e8ae.png">
+
+
+  **Amazon Relational Database Service (Amazon RDS)**: <br>
+    a service that enables you to run relational databases in the AWS Cloud. **Amazon Aurora** is an enterprise-class relational database. It is compatible with MySQL and PostgreSQL relational databases. It is up to **five times faster** than standard MySQL databases and up to **three times faster** than standard PostgreSQL databases. Also, cost is less.
+
+
+  
+  
+  
