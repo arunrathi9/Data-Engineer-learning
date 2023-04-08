@@ -272,4 +272,30 @@ Usage depends on case:
 ### Module 9: Migration and Innovation
 
   - **AWS Cloud Adoption Framework (AWS CAF)**
-  - 
+    -  organizes guidance into six areas of focus, called Perspectives. Each Perspective addresses distinct responsibilities. The planning process helps the right people across the organization prepare for the changes ahead.
+      - **Business Perspective** ensures that IT aligns with business needs and that IT investments link to key business results.
+      - **People Perspective** supports development of an organization-wide change management strategy for successful cloud adoption.
+      - **Governance Perspective** focuses on the skills and processes to align IT strategy with business strategy.
+      - **Platform Perspective** includes principles and patterns for implementing new solutions on the cloud, and migrating on-premises workloads to the cloud.
+      - **Security Perspective** ensures that the organization meets security objectives for visibility, auditability, control, and agility. 
+      - **Operations Perspective** helps you to enable, run, use, operate, and recover IT workloads to the level agreed upon with your business stakeholders.
+
+  - **AWS Snow Family** is a collection of physical devices that help to physically transport up to exabytes of data into and out of AWS. AWS Snow Family is composed of:
+    - AWS Snowcone is a small, rugged, and secure edge computing and data transfer device. It features 2 CPUs, 4 GB of memory, and 8 TB of usable storage
+    - AWS Snowball:
+      - Snowball Edge Storage Optimized - Storage: 80 TB of HDD Capacity and 1 TB of SDD EBS & Compute: 40 vCPUs, and 80 GiB of memory
+      - Snowball Edge Compute Optimized - Storage: 42-TB usable HDD capacity for S3 and 7.68 TB SDD EBS & Compute: 52 vCPUs, 208 GiB of memory, and an optional NVIDIA Tesla V100 GPU.
+    - AWS Snowmobile is an exabyte-scale data transfer service used to move large amounts of data to AWS. 
+ 
+### Module 10 - The Cloud Journey
+ 
+  - **AWS Well-Architected Framework** helps you understand how to design and operate reliable, secure, efficient, and cost-effective systems in the AWS Cloud. It provides a way for you to consistently measure your architecture against best practices and design principles and identify areas for improvement.
+    - The Well-Architected Framework is based on six pillars: 
+
+       - Operational excellence: ability to run and monitor systems to deliver business value and to continually improve supporting processes and procedures.
+       - Security: the ability to protect information, systems, and assets while delivering business value through risk assessments and mitigation strategies.
+       - Reliability: the ability to recover from infrastructure disruptions
+       - Performance efficiency: the ability to use computing resources efficiently to meet system requirements and to maintain that efficiency as demand changes and technologies evolve.
+       - Cost optimization: 
+       - Sustainability
+
