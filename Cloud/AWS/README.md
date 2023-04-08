@@ -178,6 +178,46 @@ Usage depends on case:
     a service that enables you to run relational databases in the AWS Cloud. **Amazon Aurora** is an enterprise-class relational database. It is compatible with MySQL and PostgreSQL relational databases. It is up to **five times faster** than standard MySQL databases and up to **three times faster** than standard PostgreSQL databases. Also, cost is less.
 
 
+**Amazon DynamoDB**
   
-  
-  
+  - Nonrelational databases are sometimes referred to as “NoSQL databases” because they use structures other than rows and columns to organize data.
+  - a key-value database service. It delivers single-digit millisecond performance at any scale.
+  - serverless, which means that you do not have to provision, patch, or manage servers.
+
+
+**Amazon Redshift**
+
+  - a data warehousing service that you can use for big data analytics. It offers the ability to collect data from many sources and helps you to understand relationships and trends across your data.
+
+**AWS Database Migration Service (DMS)**
+
+  - enables you to migrate relational databases, nonrelational databases, and other types of data stores.
+
+**Amazon DocumentDB** is a document database service that supports MongoDB workloads. (MongoDB is a document database program.)
+
+**Amazon Neptune** is a graph database service. eg. used for social media
+
+### Module 6: Security
+
+  - **Shared responsibility model**
+    - AWS is responsible for some parts of your environment and you (the customer) are responsible for other parts.
+
+
+  - **User permissions and access**
+    - AWS Identity and Access Management (IAM): enables you to manage access to AWS services and resources securely.
+    - AWS account root user: think of the root user as being similar to the owner of the coffee shop. It has complete access to all the AWS services and resources in the account.
+    - IAM users: An IAM user is an identity that you create in AWS. It represents the person or application that interacts with AWS services and resources. It consists of a name and credentials.
+    - IAM policies: An IAM policy is a document that allows or denies permissions to AWS services and resources.
+    - IAM groups: An IAM group is a collection of IAM users. When you assign an IAM policy to a group, all users in the group are granted permissions specified by the policy.
+    - IAM Roles: An IAM role is an identity that you can assume to gain temporary access to permissions.
+
+  - **AWS Organizations**
+    - In AWS Organizations, you can centrally control permissions for the accounts in your organization by using service control policies (SCPs). SCPs enable you to place restrictions on the AWS services, resources, and individual API actions that users and roles in each account can access.
+    - In AWS Organizations, you can group accounts into organizational units (OUs) to make it easier to manage accounts with similar business or security requirements.
+    - can apply service control policies (SCPs) to the organization root, an individual member account, or an OU.
+
+
+  - AWS Compliance
+    - **AWS Artifact** is a service that provides on-demand access to AWS security and compliance reports and select online agreements. AWS Artifact consists of two main sections:
+      - AWS Artifact Agreements
+      - AWS Artifact Reports.
