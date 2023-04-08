@@ -221,3 +221,55 @@ Usage depends on case:
     - **AWS Artifact** is a service that provides on-demand access to AWS security and compliance reports and select online agreements. AWS Artifact consists of two main sections:
       - AWS Artifact Agreements
       - AWS Artifact Reports.
+    - **Customer Compliance Center** contains resources to help you learn more about AWS compliance.
+
+  - Distributed Denial-of-service (DDoS) attacks
+    - DoS attack is a deliberate attempt to make a website or application unavailable to users.
+    - Two ways to reduce the effect of attacks:
+      - Security Groups (UDP Flood attack - EC2 gets overwhelmed large data which can not be processed with current RAM and Memory)
+      - Elastic Load Balancer (Slowloris attack - very slow/long request which take hours and even more to get the complete request to EC2)
+    - **AWS Shield** is a service that protects applications against DDoS attacks. AWS Shield provides two levels of protection: Standard and Advanced.
+
+  - **AWS Key Management Service (AWS KMS)** enables you to perform encryption operations through the use of cryptographic keys. A cryptographic key is a random string of digits used for locking (encrypting) and unlocking (decrypting) data.
+  - **AWS WAF** is a web application firewall that lets you monitor network requests that come into your web applications.
+  - **Amazon Inspector** helps to improve the security and compliance of applications by running automated security assessments
+  - **Amazon GuardDuty** is a service that provides intelligent threat detection for your AWS infrastructure and resources. It identifies threats by continuously monitoring the network activity and account behavior within your AWS environment.
+
+
+### Module 7: Monitoring and Analytics
+
+  - **Amazon CloudWatch**
+    - a web service that enables you to monitor and manage various metrics and configure alarm actions based on data from those metrics.
+    - With CloudWatch, you can create alarms that automatically perform actions if the value of your metric has gone above or below a predefined threshold.
+
+  - **AWS CloudTrail**
+    - Comprehensive API Monitoring tool
+    - records API calls for your account. The recorded information includes the identity of the API caller, the time of the API call, the source IP address of the API caller, and more.
+    - Within CloudTrail, you can also enable **CloudTrail Insights**. This optional feature allows CloudTrail to automatically detect unusual API activities in your AWS account. 
+    - you can perform Filter logs to assist with operational analysis and troubleshooting.
+
+
+  - **AWS Trusted Advisor**
+    - a web service that inspects your AWS environment and provides real-time recommendations in accordance with AWS best practices.
+    - best practice recommendations across five categories: cost optimization, performance, security, fault tolerance, and service limits.
+
+
+### Module 8: Pricing and Support
+
+  - AWS Free Tier
+    - AWS Free Tier enables you to begin using certain services without having to worry about incurring costs for the specified period. Three types of offers are available: 
+      - Always Free: These offers do not expire and are available to all AWS customers.
+        - AWS Lambda - 1 million free requests and up to 3.2 million seconds of compute time/month.
+        - Amazon DynamoDB - 25 GB of free storage/month.
+      - 12 Months Free
+      - Trials
+  - **AWS Pricing Calculator** lets you explore AWS services and create an estimate for the cost of your use cases on AWS.
+  - **AWS Budgets** you can create budgets to plan your service usage, service costs, and instance reservations.
+  - **AWS Cost Explorer** is a tool that enables you to visualize, understand, and manage your AWS costs and usage over time.
+  - **AWS Marketplace** is a digital catalog that includes thousands of software listings from independent software vendors
+
+
+### Module 9: Migration and Innovation
+
+  - **AWS Cloud Adoption Framework (AWS CAF)**
+  - 
