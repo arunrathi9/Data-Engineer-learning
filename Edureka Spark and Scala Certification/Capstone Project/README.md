@@ -20,6 +20,7 @@ hadoop fs -ls capstone_project/bicycle/ # list the files in hdfs
 <img width="1159" alt="Screenshot 2023-04-13 at 10 36 02 PM" src="https://user-images.githubusercontent.com/27626791/231833344-11ee7f5c-ac22-4530-ba66-c097a36193ae.png">
 
 **2. Read dataset in Spark**:
+
 <img width="1233" alt="Screenshot 2023-04-13 at 10 51 02 PM" src="https://user-images.githubusercontent.com/27626791/231836716-3db8fcb6-3f80-42cf-806a-2e77fef1a3ad.png">
 <img width="948" alt="Screenshot 2023-04-13 at 10 51 20 PM" src="https://user-images.githubusercontent.com/27626791/231836753-d719cea5-fbff-4801-82aa-9be3660cd9be.png">
 <img width="951" alt="Screenshot 2023-04-13 at 10 51 36 PM" src="https://user-images.githubusercontent.com/27626791/231836783-22ab323a-0b3c-4328-970a-de4f7a1a8aa9.png">
