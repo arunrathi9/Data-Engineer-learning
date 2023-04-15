@@ -356,20 +356,20 @@ kafka-topics --create --zookeeper ip-10-1-1-204.ap-south-1.compute.internal:2181
   <img width="1234" alt="kafka1" src="https://user-images.githubusercontent.com/27626791/232202924-b7382323-78b4-4573-9ba7-2b1f7aaae909.png">
 <img width="1241" alt="kafka2" src="https://user-images.githubusercontent.com/27626791/232202932-21abbccf-b0ff-4434-8935-0bebb70bc8be.png">
 
-  <br>
+  
   **2. Check data should not be there in table**
   ```
   mysql -h ip-10-1-1-204.ap-south-1.compute.internal -u arunrathit38edu -p
   ```
   <img width="1232" alt="empty-db" src="https://user-images.githubusercontent.com/27626791/232203102-2f01168b-e9c5-43bf-9d20-40fafa88268f.png">
-  <br>
+  
   **3. HDFS Source for loading data in pipeline**
   ```
   hadoop fs -ls capstone_project/ModelImplementation
   ```
   <img width="1169" alt="hdfs-source-check" src="https://user-images.githubusercontent.com/27626791/232205269-b257a3d0-8d15-4c75-ad58-102f38e5e4f9.png">
 
-  <br>
+  
   **4. Start Flume agent**<br>
   creating a file
   ```
@@ -394,7 +394,7 @@ agent1.sinks.spark.port = 4143
 agent1.sinks.spark.channel = channel1
   ```
   
-  <br>
+  
   **5. Running the flume agent**
   ```
   flume-ng agent --conf conf --conf-file hk_bicycle.conf --name agent1-Dflume.root.logger=DEBUG
@@ -460,7 +460,7 @@ println("Making predicQons...")
 val predictions = gbt_model.transform(datetime_rowsDF).select($"datetime", $"prediction".as("count"))
 
 println("PersisQng the result to RDBMS...")
-predictions.write.format("jdbc").option("url", "jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/arunrathit38edu").option("driver", "com.mysql.cj.jdbc.Driver").option("dbtable", "predictions").option("user", "arunrathit38edu").option("password", "GreenMoose82$").mode(SaveMode.Append).save
+predictions.write.format("jdbc").option("url", "jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/arunrathit38edu").option("driver", "com.mysql.cj.jdbc.Driver").option("dbtable", "predictions").option("user", "arunrathit38edu").option("password", "<password>").mode(SaveMode.Append).save
 }
 }
 ssc.start()
