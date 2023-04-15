@@ -268,6 +268,6 @@ println("GBTRegressor Root Mean Squared Error (RMSE) on test data = " + rmse)
 gbt_model.write.overwrite().save("capstone_project/ModelImplementation")
 }
 }
-
+```
   
 ![8 10](https://user-images.githubusercontent.com/27626791/232188956-b9e1e271-d322-4d12-bdc0-64e0a99bad8c.JPG)
