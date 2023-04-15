@@ -278,6 +278,7 @@ gbt_model.write.overwrite().save("capstone_project/ModelImplementation")
 sbt package
 spark-submit --class "BicyclePredict" --master yarn /home/arunrathit38edu/BicycleProject2/target/scala-2.11/telecom_2.11-1.0.jar
 ```
+<img width="1242" alt="train-model-run" src="https://user-images.githubusercontent.com/27626791/232202680-314db9f6-115b-431a-98e4-465fc73d7da0.png">
 
    **5. create a build.sbt file with below content in path /home/arunrathit38edu/BicycleProject for test data**
   ```
@@ -332,7 +333,7 @@ val gbt_model = PipelineModel.read.load("capstone_project/ModelImplementation")
 println("Making predictions...")
 val predictions = gbt_model.transform(datetime_testDF).select($"datetime", $"prediction".as("count"))
 println("Persisting the result to RDBMS...")
-predictions.write.format("jdbc").option("url", "jdbc:mysql://ip-10-1-1-204.ap- south-1.compute.internal/arunrathit38edu").option("driver", "com.mysql.cj.jdbc.Driver").option("dbtable", "predicQons").option("user", "arunrathit38edu").option("password", "GreenMoose82$").mode(SaveMode.Append).save }}
+predictions.write.format("jdbc").option("url", "jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/arunrathit38edu").option("driver", "com.mysql.cj.jdbc.Driver").option("dbtable", "predicQons").option("user", "arunrathit38edu").option("password", "<password>").mode(SaveMode.Append).save }}
   ```
   
     
@@ -341,3 +342,146 @@ predictions.write.format("jdbc").option("url", "jdbc:mysql://ip-10-1-1-204.ap- s
 sbt package
 spark-submit --packages mysql:mysql-connector-java:8.0.13 --class "BicyclePredict" --master yarn /home/arunrathit38edu/BicycleProject2/target/scala-2.11/telecom_2.11-1.0.jar
 ```
+
+<img width="1232" alt="test-run" src="https://user-images.githubusercontent.com/27626791/232202634-0747d082-61cd-456f-bcb7-f42a44ea7c56.png">
+<img width="853" alt="test-run-result-in-database" src="https://user-images.githubusercontent.com/27626791/232202645-e8a61892-22e2-466e-8dc8-7f96e1d971ae.png">
+
+#### Application for Streaming Data
+  
+  **1. Setup flume to push data into spark flume sink.**
+  Create ‘project_hk_bicycle’ topic
+  ```
+kafka-topics --create --zookeeper ip-10-1-1-204.ap-south-1.compute.internal:2181 --replication-factor 1 --partitions 1 --topic project_hk_bicycle
+  ```
+  <img width="1234" alt="kafka1" src="https://user-images.githubusercontent.com/27626791/232202924-b7382323-78b4-4573-9ba7-2b1f7aaae909.png">
+<img width="1241" alt="kafka2" src="https://user-images.githubusercontent.com/27626791/232202932-21abbccf-b0ff-4434-8935-0bebb70bc8be.png">
+
+  <br>
+  **2. Check data should not be there in table**
+  ```
+  mysql -h ip-10-1-1-204.ap-south-1.compute.internal -u arunrathit38edu -p
+  ```
+  <img width="1232" alt="empty-db" src="https://user-images.githubusercontent.com/27626791/232203102-2f01168b-e9c5-43bf-9d20-40fafa88268f.png">
+  <br>
+  **3. HDFS Source for loading data in pipeline**
+  ```
+  hadoop fs -ls capstone_project/ModelImplementation
+  ```
+  <img width="1169" alt="hdfs-source-check" src="https://user-images.githubusercontent.com/27626791/232205269-b257a3d0-8d15-4c75-ad58-102f38e5e4f9.png">
+
+  <br>
+  **4. Start Flume agent**<br>
+  creating a file
+  ```
+  agent1.sources = source1
+agent1.channels = channel1
+agent1.sinks = spark
+agent1.sources.source1.type = org.apache.flume.source.kafka.KafkaSource
+agent1.sources.source1.zookeeperConnect = ip-10-1-1-204.ap-south-1.compute.internal:2181
+agent1.sources.source1.kafka.bootstrap.servers = ip-10-1-2-24.ap-south-1.compute.internal:9092
+agent1.sources.source1.kafka.topics = project_hk_bicycle
+agent1.sources.source1.kafka.consumer.group.id = project_hk_bicycle
+agent1.sources.source1.channels = channel1
+agent1.sources.source1.interceptors = i1
+agent1.sources.source1.interceptors.i1.type = timestamp
+agent1.sources.source1.kafka.consumer.timeout.ms = 100
+agent1.channels.channel1.type = memory
+agent1.channels.channel1.capacity = 10000
+agent1.channels.channel1.transactionCapacity = 1000
+agent1.sinks.spark.type = org.apache.spark.streaming.flume.sink.SparkSink
+agent1.sinks.spark.hostname = ip-10-1-2-24.ap-south-1.compute.internal
+agent1.sinks.spark.port = 4143
+agent1.sinks.spark.channel = channel1
+  ```
+  
+  <br>
+  **5. Running the flume agent**
+  ```
+  flume-ng agent --conf conf --conf-file hk_bicycle.conf --name agent1-Dflume.root.logger=DEBUG
+  ```
+  <img width="1230" alt="flume-agent" src="https://user-images.githubusercontent.com/27626791/232205302-661fcb59-0ff7-424d-a673-9051ed1b033e.png">
+
+  **6. Create build.sbt file with code which is given below**
+  ```
+  name := "Telecom"
+version := "1.0"
+scalaVersion := "2.11.8"
+libraryDependencies += "org.apache.spark" %% "spark-core" % "2.2.1"
+libraryDependencies += "org.apache.spark" %% "spark-sql" % "2.2.1" % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-mllib" % "2.2.1" % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-streaming" % "2.2.0" % "provided"
+libraryDependencies += "org.apache.spark" %% "spark-streaming-flume" % "2.4.8"
+libraryDependencies += "org.apache.spark" %% "spark-streaming-kafka" % "1.6.0"
+  ```
+   **7. Create scala file with code which is given below**
+  ```
+  import org.apache.spark.{SparkConf, SparkContext}
+import org.apache.spark.SparkContext._
+import org.apache.spark.sql._
+import org.apache.spark.sql.types._
+import org.apache.spark.sql.functions._
+import org.apache.spark.ml.regression.{GBTRegressionModel, GBTRegressor}
+import org.apache.spark.ml.evaluation.RegressionEvaluator
+import org.apache.spark.ml.feature.{StringIndexer, VectorAssembler}
+import org.apache.spark.ml._
+import org.apache.spark.ml.feature.VectorAssembler
+import org.apache.spark.ml.Pipeline
+import org.apache.spark.ml.feature.OneHotEncoder
+import org.apache.spark.streaming.{Seconds, StreamingContext}
+import org.apache.spark.streaming.flume._
+
+
+object BicycleStreaming {
+case class Bicycle(datetime: String, season: Int, holiday: Int, workingday: Int, weather: Int, temp: Double, atemp: Double, humidity: Int, windspeed: Double)
+def main(args: Array[String]) {
+val sparkConf = new SparkConf().setAppName("Telecom")
+val sc = new SparkContext(sparkConf)
+val ssc = new StreamingContext(sc, Seconds(2))
+sc.setLogLevel("ERROR")
+val spark = new org.apache.spark.sql.SQLContext(sc)
+import spark.implicits._
+import org.apache.spark.streaming.flume._
+val flumeStream = FlumeUtils.createPollingStream(ssc, "ip-10-1-1-204.ap-south-1.compute.internal", 4143)
+
+println("Loading trained model...")
+import org.apache.spark.ml.{Pipeline, PipelineModel}
+val gbt_model = PipelineModel.read.load("capstone_project/ModelImplementation")
+val lines = flumeStream.map(event => new String(event.event.getBody().array(), "UTF-8"))
+lines.foreachRDD { rdd => def row(line: List[String]): Bicycle = Bicycle(line(0), line(1).toInt, line(2).toInt, line(3).toInt, line(4).toInt, line(5).toDouble, line(6).toDouble, line(7).toInt, line(8).toDouble )
+val rows_rdd = rdd.map(_.split(",").to[List]).map(row)
+val rows_df = rows_rdd.toDF
+if(rows_df.count > 0) {
+val tr_rowsDF = rows_df.withColumn("season", rows_df("season").cast(StringType)).withColumn("holiday", rows_df("holiday").cast(StringType)).withColumn("workingday", rows_df("workingday").cast(StringType)).withColumn("weather", rows_df("weather").cast(StringType))
+val season_rowsDF = tr_rowsDF.withColumn("season_1", when($"season"===1,1).otherwise(0)).withColumn("season_2", when($"season"===2,1).otherwise(0)).withColumn("season_3", when($"season"===3,1).otherwise(0)).withColumn("season_4", when($"season"===4,1).otherwise(0)).drop("season")
+val weather_rowsDF = season_rowsDF.withColumn("weather_1", when($"weather"===1,1).otherwise(0)).withColumn("weather_2", when($"weather"===2,1).otherwise(0)).withColumn("weather_3", when($"weather"===3,1).otherwise(0)).withColumn("weather_4", when($"weather"===4,1).otherwise(0)).drop("weather")
+val datetime_rowsDF = weather_rowsDF.withColumn("year",year(from_unixtime(unix_timestamp($"datetime", "dd-mm- yyyy hh:mm")))).withColumn("month",month(from_unixtime(unix_timestamp($"datetime", "dd- mm-yyyy hh:mm")))).withColumn("day",dayofyear(from_unixtime(unix_timestamp($"datetime", "dd-mm-yyyy hh:mm"))))
+
+println("Making predicQons...")
+val predictions = gbt_model.transform(datetime_rowsDF).select($"datetime", $"prediction".as("count"))
+
+println("PersisQng the result to RDBMS...")
+predictions.write.format("jdbc").option("url", "jdbc:mysql://ip-10-1-1-204.ap-south-1.compute.internal/arunrathit38edu").option("driver", "com.mysql.cj.jdbc.Driver").option("dbtable", "predictions").option("user", "arunrathit38edu").option("password", "GreenMoose82$").mode(SaveMode.Append).save
+}
+}
+ssc.start()
+ssc.awaitTermination()
+}
+}
+  ```
+  
+  **7. Run the package command**
+  ```
+  sbt package
+  spark-submit --packages mysql:mysql-connector-java:8.0.13 --class "BicycleStreaming" --master yarn /home/arunrathit38edu/BicycleProject2/target/scala-2.11/telecom_2.11-1.0.jar
+  ```
+  
+  **8. Run kafka-console-producer**
+  ```
+  kafka-console-producer --broker-list ip-10-1-1-204.ap-south-1.compute.internal:9092 --topic project_hk_bicycle
+  ```
+  <img width="1245" alt="kafka" src="https://user-images.githubusercontent.com/27626791/232206453-8f2b7bb9-9efb-49ed-8ce1-326eb54c6131.png">
+<img width="1077" alt="kakfa-producer" src="https://user-images.githubusercontent.com/27626791/232206579-b8f733f3-dd15-4216-abc4-aa20839742eb.png">
+
+  
+  
+  
