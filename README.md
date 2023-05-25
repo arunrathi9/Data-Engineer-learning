@@ -20,3 +20,11 @@
   - Binary Search Patterns: https://lnkd.in/gKEm_qUK
   - Sliding Window Patterns: https://lnkd.in/gjatQ5pK
   - Graph Patterns: https://lnkd.in/gKE6w7Jb
+  - Greedy Algorithm Patterns: https://leetcode.com/discuss/general-discussion/669996/greedy-for-beginners-problems-sample-solutions
+  - Tree Traversal Techniques: https://leetcode.com/discuss/general-discussion/1056151/tree-traversal-preorder-inorder-postorder-with-sample-solutions
+  - Union-Find (Disjoint Set Union): https://leetcode.com/discuss/general-discussion/1108832/union-find-for-beginners-problems-sample-solutions
+  - Topological Sorting: https://leetcode.com/discuss/general-discussion/1146551/topological-sorting-in-depth-explanation-problems-sample-solutions
+  - Bit Manipulation: https://leetcode.com/discuss/general-discussion/1139479/bit-manipulation-in-depth-explanation-problems-sample-solutions
+  - Math and Number Theory: https://leetcode.com/discuss/general-discussion/1162606/math-number-theory-for-beginners-problems-sample-solutions
+  - System Design: https://leetcode.com/discuss/general-discussion/1084618/system-design-for-beginners-problems-sample-solutions
+  - Bit Manipulation Hacks: https://leetcode.com/discuss/general-discussion/629711/BIT-MANIPULATION-HACKS!
