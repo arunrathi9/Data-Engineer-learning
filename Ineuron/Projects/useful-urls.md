@@ -5,3 +5,5 @@ ineuron notebook - https://drive.google.com/file/d/1SkSZILJBNvkBRzXXzpIqbi12OWCo
 az203 - https://docs.google.com/document/d/1M-_HjCVq8wEX89RRFsLBJ4RT44zDWOS9ZUKojY49Plk/edit?usp=sharing
 
 aws to azure - https://learn.microsoft.com/en-us/azure/architecture/aws-professional/services
+
+Resume - https://drive.google.com/file/d/15Uaq7hVppNwifCZ7sVV6FWk9PrhANuGw/view?usp=sharing
