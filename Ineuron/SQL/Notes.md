@@ -248,6 +248,236 @@ Most Important SQL Commands
         ....
     );
     ```
+    **NOT NULL** - Ensures that a column cannot have a NULL value
+    ```
+    CREATE TABLE Products (
+        ID INT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT
+    );
+
+    ALTER TABLE PRODUCTS
+    ALTER COLUMN AGE INT NOT NULL;
+    ```
+
+    **UNIQUE** - Ensures that all values in a column are different
+    ```
+    #SQL Server / Oracle / MS access:
+    CREATE TABLE Products (
+        ID INT NOT NULL UNIQUE,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT
+    );
+
+    #MySQL
+    CREATE TABLE Products (
+        ID INT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT,
+        UNIQUE(ID)
+    );
+
+    #UNIQUE Constraint on Multiple columns (works on all sql)
+    CREATE TABLE Products (
+        ID INT NOT NULL UNIQUE,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT,
+        CONSTRAINT UC_Products UNIQUE (ID, NAME)
+    );
+
+    # ADD CONSTRAINT IN AN EXISTING TABLE
+    ALTER TABLE Products
+    ADD UNIQUE(ID);
+
+    #MULTIPLE COLUMNS
+    ALTER TABLE Products
+    ADD CONSTRAINT UC_Products UNIQUE(ID, NAME);
+
+    #DROP UNIQUE CONSTRAINT
+    #MySQL
+    ALTER TABLE Products
+    DROP INDEX UC_Products
+
+    #SQL Server / Oracle / MS access:
+    ALTER TABLE Products
+    DROP CONSTRAINT UC_Products
+    ```
+    **PRIMARY KEY** - A combination of a NOT NULL and UNIQUE. Uniquely identifies each row in a table
+    ```
+    #SQL Server / Oracle / MS access:
+    CREATE TABLE Products (
+        ID INT NOT NULL PRIMARY KEY,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT
+    );
+
+    #MySQL
+    CREATE TABLE Products (
+        ID INT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT,
+        PRIMARY KEY (ID)
+    );
+
+    #UNIQUE Constraint on Multiple columns (works on all sql)
+    CREATE TABLE Products (
+        ID INT NOT NULL UNIQUE,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT,
+        CONSTRAINT PK_Products PRIMARY KEY (ID, NAME)
+    );
+    **HERE only one primary key (PK_Products) (made up of two columns)
+
+    # ADD CONSTRAINT IN AN EXISTING TABLE
+    ALTER TABLE Products
+    ADD PRIMARY KEY (ID);
+
+    #MULTIPLE COLUMNS
+    ALTER TABLE Products
+    ADD CONSTRAINT PK_Products PRIMARY KEY (ID, NAME);
+
+    #DROP PRIMARY KEY CONSTRAINT
+    #MySQL
+    ALTER TABLE Products
+    DROP PRIMARY KEY;
+
+    #SQL Server / Oracle / MS access:
+    ALTER TABLE Products
+    DROP CONSTRAINT PK_Products;
+    ```
+    **FOREIGN KEY** - Prevents actions that would destroy links between tables
+    ```
+    #SQL Server / Oracle / MS access:
+    CREATE TABLE Orders (
+        OrderID int NOT NULL PRIMARY KEY,
+        OrderNumber int NOT NULL,
+        PersonID int FOREIGN KEY REFERENCES Persons(PersonID)
+    );
+
+    #MySQL
+    CREATE TABLE Orders (
+        OrderID int NOT NULL,
+        OrderNumber int NOT NULL,
+        PersonID int,
+        PRIMARY KEY (OrderID),
+        FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+    );
+
+    #UNIQUE Constraint on Multiple columns (works on all sql)
+    CREATE TABLE Orders (
+        OrderID int NOT NULL,
+        OrderNumber int NOT NULL,
+        PersonID int,
+        PRIMARY KEY (OrderID),
+        CONSTRAINT FK_PersonOrder FOREIGN KEY (PersonID) REFERENCES Persons(PersonID)
+    );
+    **HERE only one primary key (PK_Products) (made up of two columns)
+
+    #alter table
+    ALTER TABLE Orders
+    ADD FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+
+    ALTER TABLE Orders
+    ADD CONSTRAINT FK_PersonOrder
+    FOREIGN KEY (PersonID) REFERENCES Persons(PersonID);
+    ```
+    **CHECK** - Ensures that the values in a column satisfies a specific condition
+    ```
+    #SQL Server / Oracle / MS access:
+    CREATE TABLE Products (
+        ID INT NOT NULL PRIMARY KEY,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT CHECK (AGE>=18)
+    );
+
+    #MySQL
+    CREATE TABLE Products (
+        ID INT NOT NULL,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT,
+        PRIMARY KEY (ID),
+        CHECK (AGE>=18)
+    );
+
+    #UNIQUE Constraint on Multiple columns (works on all sql)
+    CREATE TABLE Products (
+        ID INT NOT NULL UNIQUE,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT,
+        CITY VARCHAR(255),
+        CONSTRAINT CHK_Products CHECK (AGE>=18 AND CITY='GURUGRAM')
+    );
+
+    # ADD AND DROP CONSTRAINT is same as primary key
+    ```
+    **DEFAULT** - Sets a default value for a column if no value is specified
+    ```
+    CREATE TABLE Products (
+        ID INT NOT NULL UNIQUE,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT,
+        CITY VARCHAR(255) DEFAULT 'GURUGRAM',
+        CONSTRAINT CHK_Products CHECK (AGE>=18 AND CITY='GURUGRAM')
+    );
+    ```
+    **CREATE INDEX** - Used to create and retrieve data from the database very quickly.
+    ```
+    # create index where duplicate values are allowed
+    CREATE INDEX index_name
+    ON table_name (col1, col2, col3,...);
+
+    #create unique index where no duplicate allowed
+    CREATE UNIQUE INDEX index_name
+    ON table_name (col1, col2, col3,...);
+
+    #MySQL
+    ALTER TABLE table_name
+    DROP INDEX index_name;
+    ```
+- AUTO INCREMENT Field: allows a unique no to be generated automatically when a new record is inserted into a table.
+    ```
+    CREATE TABLE Products (
+        ID INT NOT NULL AUTO_INCREMENT,
+        NAME VARCHAR(255) NOT NULL,
+        AGE INT,
+        CITY VARCHAR(255) DEFAULT 'GURUGRAM',
+        CONSTRAINT CHK_Products CHECK (AGE>=18 AND CITY='GURUGRAM')
+    );
+
+    #BY default, it starts from 1 but can be changed:
+    ALTER TABLE Products AUTO_INCREMENT=100;
+    ```
+- Working with Dates - 
+    - SQL DATE DATA TYPES:(1. MySQL, then SQL server)
+        - DATE - format YYYY-MM-DD
+        - DATETIME - format YYYY-MM-DD HH:MI:SS
+        - TIMESTAMP - format YYYY-MM-DD HH:MI:SS
+        - YEAR - format YYYY or YY
+        <br>
+        sql server
+        - DATE - format YYYY-MM-DD
+        - DATETIME - format YYYY-MM-DD HH:MI:SS
+        - SMALLDATETIME - format YYYY-MM-DD HH:MI:SS
+        - TIMESTAMP - format: a unique number
+- VIEWS - a virtual table based on the result set of an SQL statement
+    ```
+    #create a view
+    CREATE VIEW view_name AS
+    SELECT col1, col2, ...
+    FROM table_name
+    WHERE condition;
+
+    #create or replace view syntax
+    CREATE OR REPLACE VIEW view_name AS
+    SELECT col1, col2,...
+    FROM table_name
+    where condition;
+
+    #drop a view
+    DROP VIEW IF EXISTS view_name;
+    ```
+
+
     
 
 
