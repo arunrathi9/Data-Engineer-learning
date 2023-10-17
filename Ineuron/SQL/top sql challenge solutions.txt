@@ -1,0 +1,12 @@
+Top SQL challenge solution
+1. https://github.com/aarav1203/SQL_CHALLENGE
+2. https://github.com/Namrta08/BIG_DATA_BOOTCAMP/tree/main/SQL%20CH
+ALLENGE%20QUESTIONS
+3. https://github.com/vajay8679/Ineuron/tree/main/MYSQL/MYSql_Final_Assign
+ment
+4. https://github.com/MindFaktur/BigDataPractice/tree/main/SQL
+5. https://github.com/Abhijit-Barik01/Big-Data-Engineering/blob/main/SQL/SQL_
+150_CHALLANGE.pdf
+6. https://github.com/mostafiz2906/iNeuronAssignments/tree/main/SQLAssignm
+ent
+7. https://github.com/abhishek-chaubey12/SQL-Challenge.git
