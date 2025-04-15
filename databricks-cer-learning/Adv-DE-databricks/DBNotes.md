@@ -157,3 +157,80 @@ Slowing changing dimensions in Lakehouse
 ![img4](images/m1-secure10.png)
 ![img4](images/m1-secure11.png)
 ![img4](images/m1-secure12.png)
+
+**Demo: PII lookup table**
+![img4](images/m1-tab1.png)
+![img4](images/m1-tab2.png)
+![img4](images/m1-tab3.png)
+![img4](images/m1-tab4.png)
+
+**Demo: Pseudonymized ETL**
+![img4](images/m1-etl1.png)
+![img4](images/m1-etl2.png)
+![img4](images/m1-etl3.png)
+![img4](images/m1-etl4.png)
+![img4](images/m1-etl5.png)
+
+**Streaming data and CDF**
+![img4](images/m1-cdf1.png)
+![img4](images/m1-cdf2.png)
+![img4](images/m1-cdf3.png)
+
+## Module 4: Optimization performance with Spark and Delta Lake
+
+**Designing the foundation**
+![img4](images/m4-fun1.png)
+![img4](images/m4-fun2.png)
+![img4](images/m4-fun3.png)
+![img4](images/m4-fun4.png)
+![img4](images/m4-fun5.png)
+![img4](images/m4-fun6.png)
+![img4](images/m4-fun7.png)
+
+**Code Optimization**
+![img4](images/m4-op1.png)
+![img4](images/m4-op2.png)
+
+**Assess and Debug Spark Applications**
+![img4](images/m4-qq.png)
+
+![img4](images/m4-ui.png)
+
+**Shuffles**
+![img4](images/m1-shuf1.png)
+![img4](images/m1-shuf2.png)
+![img4](images/m1-shuf3.png)
+![img4](images/m1-shuf4.png)
+![img4](images/m1-shuf5.png)
+![img4](images/m1-shuf6.png)
+
+**Spill**
+![img4](images/m1-spill1.png)
+![img4](images/m1-spill2.png)
+![img4](images/m1-spill3.png)
+![img4](images/m1-spill4.png)
+
+**Skew**
+![img4](images/m1-skew1.png)
+![img4](images/m1-skew2.png)
+![img4](images/m1-skew3.png)
+
+**Serialization**
+![img4](images/m4-serial1.png)
+![img4](images/m4-serial2.png)
+
+**Choosing right cluster**
+![img4](images/m4-cluster1.png)
+![img4](images/m4-cluster2.png)
+![img4](images/m4-cluster3.png)
+![img4](images/m4-cluster4.png)
+![img4](images/m4-cluster5.png)
+![img4](images/m4-cluster6.png)
+![img4](images/m4-cluster7.png)
+
+## Module 6: Automate production workflows
+
+**REST API and CLI**
+
+
+**working with terraform**
